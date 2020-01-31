@@ -23,12 +23,16 @@ jobs:
       - browsers/install-chromedriver
       - run:
           name: RSpec
-          command: bundle exec rspec -f d
+          command: |
+            set +e
+            bundle exec rspec -f d
       - run:
           name: Compress
-          command: tar -cvzf tmp/screenshots.tar.gz tmp
+          command: tar -cvzf screenshots.tar.gz tmp
       - store_artifacts:
           path: tmp/
+      - store_artifacts:
+          path: screenshots.tar.gz
 
 workflows:
   version: 2
