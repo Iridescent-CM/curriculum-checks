@@ -24,6 +24,9 @@ jobs:
       - run:
           name: RSpec
           command: bundle exec rspec -f d
+      - run:
+          name: Compress
+          command: tar -cvzf tmp/screenshots.tar.gz tmp
       - store_artifacts:
           path: tmp/
 
