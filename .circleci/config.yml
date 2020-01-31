@@ -29,6 +29,7 @@ jobs:
       - run:
           name: Compress
           command: tar -cvzf screenshots.tar.gz tmp
+          when: always
       - store_artifacts:
           path: tmp/
       - store_artifacts:
