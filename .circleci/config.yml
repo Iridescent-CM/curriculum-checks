@@ -21,29 +21,31 @@ jobs:
       - ruby/bundle-install
       - browsers/install-chrome
       - browsers/install-chromedriver
+      - run: sudo apt-get update; sudo apt-get install imagemagick
       - run:
           name: RSpec
           command: |
             set +e
             bundle exec rspec -f d
-      - run:
-          name: Compress
-          command: tar -cvzf screenshots.tar.gz tmp
-          when: always
+      - run: bin/pdf.sh
       - store_artifacts:
           path: tmp/
-      - store_artifacts:
-          path: screenshots.tar.gz
+      # - run:
+      #     name: Compress
+      #     command: tar -cvzf screenshots.tar.gz tmp
+      #     when: always
+      # - store_artifacts:
+      #     path: screenshots.tar.gz
 
 workflows:
   version: 2
   workflow:
     jobs:
       - test
-  nightly:
+  daily:
     triggers:
       - schedule:
-          cron: "0 0 * * *"
+          cron: "0 6 * * *"
           filters:
             branches:
               only:
