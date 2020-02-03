@@ -27,7 +27,10 @@ jobs:
           command: |
             set +e
             bundle exec rspec -f d
-      - run: bin/pdf.sh
+      - run:
+          name: Make pdfs
+          command: bin/pdf.sh
+          when: always
       - store_artifacts:
           path: tmp/
       # - run:
