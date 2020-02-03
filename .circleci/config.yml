@@ -24,9 +24,7 @@ jobs:
       - run: sudo apt-get update; sudo apt-get install imagemagick
       - run:
           name: RSpec
-          command: |
-            set +e
-            bundle exec rspec -f d
+          command: bundle exec rspec -f d
       - run:
           name: Make pdfs
           command: bin/pdf.sh
@@ -48,7 +46,7 @@ workflows:
   daily:
     triggers:
       - schedule:
-          cron: "0 6 * * *"
+          cron: "0 17 * * *"
           filters:
             branches:
               only:
